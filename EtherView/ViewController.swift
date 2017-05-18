@@ -22,7 +22,11 @@ extension UIViewController {
 }
 
 struct Exchange {
-    var name: String?
+    let name:Variable<String>
+    
+    init(name:String) {
+        self.name = Variable(name)
+    }
 }
 
 extension UIStoryboard {
@@ -56,7 +60,7 @@ class ViewController: UIViewController {
         
         detailButton.rx.tap
             .map {
-                return Exchange(name: "John Doe")
+                return Exchange(name: "Exchange One")
             }
             .bind(to: profileSegue)
             .addDisposableTo(disposeBag)
