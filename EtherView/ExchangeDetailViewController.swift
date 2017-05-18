@@ -6,4 +6,18 @@
 //  Copyright © 2017 James McNamee. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class ExchangeDetailViewController: UIViewController {
+    
+    var exchange: Exchange?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "Exchange Detail"
+        
+        if let received = exchange {
+            print(received)
+        }
+    }
+}
