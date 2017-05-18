@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ExchangeDetailViewController: UIViewController {
+    let disposeBag = DisposeBag()
     
-    var exchange: Exchange?
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    var exchange: Exchange!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Exchange Detail"
         
-        if let received = exchange {
-            print(received)
-        }
+        exchange.name
+            .asObservable()
+            .bind(to: nameLabel.rx.text)
+            .addDisposableTo(disposeBag)
+        
+        // bind exchange image to custom navigation bar uiimage
     }
 }
