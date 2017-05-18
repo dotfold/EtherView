@@ -7,14 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		794199EA1ECDD1BF00D10CD7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794199E91ECDD1BF00D10CD7 /* RxSwift.framework */; };
+		794199EB1ECDD1BF00D10CD7 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 794199E91ECDD1BF00D10CD7 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		794199EE1ECDD1C500D10CD7 /* RxSegue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794199ED1ECDD1C500D10CD7 /* RxSegue.framework */; };
+		794199EF1ECDD1C500D10CD7 /* RxSegue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 794199ED1ECDD1C500D10CD7 /* RxSegue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		794199F11ECDD1CB00D10CD7 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794199F01ECDD1CB00D10CD7 /* Starscream.framework */; };
+		794199F21ECDD1CB00D10CD7 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 794199F01ECDD1CB00D10CD7 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		794199F41ECDD1D100D10CD7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794199F31ECDD1D100D10CD7 /* RxCocoa.framework */; };
+		794199F51ECDD1D100D10CD7 /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 794199F31ECDD1D100D10CD7 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		79D990201ECDBA7B0095E5F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */; };
 		79D990221ECDBA7B0095E5F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D990211ECDBA7B0095E5F4 /* ViewController.swift */; };
 		79D990251ECDBA7B0095E5F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79D990231ECDBA7B0095E5F4 /* Main.storyboard */; };
 		79D990271ECDBA7B0095E5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79D990261ECDBA7B0095E5F4 /* Assets.xcassets */; };
 		79D9902A1ECDBA7B0095E5F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79D990281ECDBA7B0095E5F4 /* LaunchScreen.storyboard */; };
+		79D990321ECDC20B0095E5F4 /* ExchangeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D990311ECDC20B0095E5F4 /* ExchangeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		794199EC1ECDD1BF00D10CD7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				794199F51ECDD1D100D10CD7 /* RxCocoa.framework in Embed Frameworks */,
+				794199EF1ECDD1C500D10CD7 /* RxSegue.framework in Embed Frameworks */,
+				794199F21ECDD1CB00D10CD7 /* Starscream.framework in Embed Frameworks */,
+				794199EB1ECDD1BF00D10CD7 /* RxSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		794199E91ECDD1BF00D10CD7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		794199ED1ECDD1C500D10CD7 /* RxSegue.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSegue.framework; path = Carthage/Build/iOS/RxSegue.framework; sourceTree = "<group>"; };
+		794199F01ECDD1CB00D10CD7 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		794199F31ECDD1D100D10CD7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		79D9901C1ECDBA7B0095E5F4 /* EtherView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtherView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79D990211ECDBA7B0095E5F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +52,7 @@
 		79D990261ECDBA7B0095E5F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79D990291ECDBA7B0095E5F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79D9902B1ECDBA7B0095E5F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79D990311ECDC20B0095E5F4 /* ExchangeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +60,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				794199F41ECDD1D100D10CD7 /* RxCocoa.framework in Frameworks */,
+				794199EE1ECDD1C500D10CD7 /* RxSegue.framework in Frameworks */,
+				794199F11ECDD1CB00D10CD7 /* Starscream.framework in Frameworks */,
+				794199EA1ECDD1BF00D10CD7 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +73,10 @@
 		79D990131ECDBA7B0095E5F4 = {
 			isa = PBXGroup;
 			children = (
+				794199F31ECDD1D100D10CD7 /* RxCocoa.framework */,
+				794199F01ECDD1CB00D10CD7 /* Starscream.framework */,
+				794199ED1ECDD1C500D10CD7 /* RxSegue.framework */,
+				794199E91ECDD1BF00D10CD7 /* RxSwift.framework */,
 				79D9901E1ECDBA7B0095E5F4 /* EtherView */,
 				79D9901D1ECDBA7B0095E5F4 /* Products */,
 			);
@@ -57,6 +96,7 @@
 				79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */,
 				79D990211ECDBA7B0095E5F4 /* ViewController.swift */,
 				79D990231ECDBA7B0095E5F4 /* Main.storyboard */,
+				79D990311ECDC20B0095E5F4 /* ExchangeDetailViewController.swift */,
 				79D990261ECDBA7B0095E5F4 /* Assets.xcassets */,
 				79D990281ECDBA7B0095E5F4 /* LaunchScreen.storyboard */,
 				79D9902B1ECDBA7B0095E5F4 /* Info.plist */,
@@ -74,6 +114,7 @@
 				79D990181ECDBA7B0095E5F4 /* Sources */,
 				79D990191ECDBA7B0095E5F4 /* Frameworks */,
 				79D9901A1ECDBA7B0095E5F4 /* Resources */,
+				794199EC1ECDD1BF00D10CD7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -137,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79D990221ECDBA7B0095E5F4 /* ViewController.swift in Sources */,
+				79D990321ECDC20B0095E5F4 /* ExchangeDetailViewController.swift in Sources */,
 				79D990201ECDBA7B0095E5F4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +302,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = EtherView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.deakin.EtherView;
@@ -272,6 +318,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = EtherView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = au.com.deakin.EtherView;
@@ -299,6 +349,7 @@
 				79D990301ECDBA7B0095E5F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
