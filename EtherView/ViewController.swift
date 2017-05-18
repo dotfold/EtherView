@@ -42,7 +42,10 @@ extension UIStoryboard {
 class ViewController: UIViewController {
     let disposeBag = DisposeBag()
     
-    @IBOutlet weak var detailButton: UIButton!
+    @IBOutlet weak var ex1: UIButton!
+    @IBOutlet weak var ex2: UIButton!
+    @IBOutlet weak var ex3: UIButton!
+    
     
     var profileSegue: AnyObserver<Exchange> {
         return NavigationSegue(fromViewController: self.navigationController!,
@@ -58,9 +61,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        detailButton.rx.tap
+        ex1.rx.tap
             .map {
                 return Exchange(name: "Exchange One")
+            }
+            .bind(to: profileSegue)
+            .addDisposableTo(disposeBag)
+        
+        ex2.rx.tap
+            .map {
+                return Exchange(name: "Exchange Two")
+            }
+            .bind(to: profileSegue)
+            .addDisposableTo(disposeBag)
+        
+        ex3.rx.tap
+            .map {
+                return Exchange(name: "Exchange Three")
             }
             .bind(to: profileSegue)
             .addDisposableTo(disposeBag)
