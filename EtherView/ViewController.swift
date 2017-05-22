@@ -121,6 +121,33 @@ class ViewController: UIViewController {
             .do(onNext: { val in
 //                print(val)
             })
+        
+        // moving average of trades per minute, the 60 second window is sliding after the first minute of running
+        // this is more complicated than it should be due to the limited implementation of the `window` operator in RxSwift
+        let window = bitfinexTrades
+            .scan(0, accumulator: { (prevCount: Int, next: JSON) -> Int in
+                return prevCount + 1
+            })
+            .startWith(0)
+            
+        let withDelay = window
+            .delay(RxTimeInterval(60), scheduler: MainScheduler.instance)
+            .startWith(0)
+
+        let runningTotal = Observable.combineLatest(window, withDelay, resultSelector: { (total: Int, td: Int) -> Int in
+            return total - td
+        })
+            
+        _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+            .withLatestFrom(runningTotal, resultSelector: { (interval, total) -> Int in
+                print(": \(interval) \(total)")
+                return total
+            })
+            .do(onNext: { (total: Int) in
+                print("running total \(total)")
+            })
+            .subscribe()
+        
         bitfinexTrades
             .subscribe()
             .addDisposableTo(disposeBag)
