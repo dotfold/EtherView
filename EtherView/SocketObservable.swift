@@ -34,14 +34,11 @@ struct SocketMessage {
 func createSocketObservable (address url: String) -> Observable<SocketMessage> {
 
     let socket = WebSocket(url: URL(string: url)!)
-//    let writeSubject = PublishSubject<String>()
-    
     return Observable.create { observer in
         
         _ = socket.rx.response.subscribe(onNext: { (response: WebSocketEvent) in
             switch response {
             case .connected:
-//                print("Connected")
                 observer.on(.next(SocketMessage(status: "Connected", socket: socket)))
             case .disconnected(let error):
                 print("Disconnected with optional error : \(String(describing: error))")
@@ -49,8 +46,6 @@ func createSocketObservable (address url: String) -> Observable<SocketMessage> {
                 observer.on(.completed)
             case .message(let msg):
                 observer.on(.next(SocketMessage(status: "Connected", message: msg)))
-                print(">")
-//                print("Message : \(msg)")
             case .data(_):
                 print("Data")
             case .pong:
