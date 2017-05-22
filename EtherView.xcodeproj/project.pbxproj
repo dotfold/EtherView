@@ -28,6 +28,7 @@
 		79D139371ED2EEE200EB4ED7 /* ExchangeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D139361ED2EEE200EB4ED7 /* ExchangeDetailViewController.swift */; };
 		79D1393C1ED2F0DE00EB4ED7 /* 65ad6c8-small-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D1393B1ED2F0DE00EB4ED7 /* 65ad6c8-small-logo.png */; };
 		79D1393F1ED2F21900EB4ED7 /* TradeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D1393E1ED2F21900EB4ED7 /* TradeTableCell.swift */; };
+		79D139411ED30ED600EB4ED7 /* etherview logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D139401ED30ED600EB4ED7 /* etherview logo.png */; };
 		79D990201ECDBA7B0095E5F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */; };
 		79D990251ECDBA7B0095E5F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79D990231ECDBA7B0095E5F4 /* Main.storyboard */; };
 		79D990271ECDBA7B0095E5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79D990261ECDBA7B0095E5F4 /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		79D139361ED2EEE200EB4ED7 /* ExchangeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeDetailViewController.swift; sourceTree = "<group>"; };
 		79D1393B1ED2F0DE00EB4ED7 /* 65ad6c8-small-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "65ad6c8-small-logo.png"; sourceTree = "<group>"; };
 		79D1393E1ED2F21900EB4ED7 /* TradeTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeTableCell.swift; sourceTree = "<group>"; };
+		79D139401ED30ED600EB4ED7 /* etherview logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "etherview logo.png"; sourceTree = "<group>"; };
 		79D9901C1ECDBA7B0095E5F4 /* EtherView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtherView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79D990241ECDBA7B0095E5F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		79D1393A1ED2F0D400EB4ED7 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				79D139401ED30ED600EB4ED7 /* etherview logo.png */,
 				79D1393B1ED2F0DE00EB4ED7 /* 65ad6c8-small-logo.png */,
 			);
 			name = Assets;
@@ -247,6 +250,7 @@
 			files = (
 				79D9902A1ECDBA7B0095E5F4 /* LaunchScreen.storyboard in Resources */,
 				79D990271ECDBA7B0095E5F4 /* Assets.xcassets in Resources */,
+				79D139411ED30ED600EB4ED7 /* etherview logo.png in Resources */,
 				79D1393C1ED2F0DE00EB4ED7 /* 65ad6c8-small-logo.png in Resources */,
 				79D990251ECDBA7B0095E5F4 /* Main.storyboard in Resources */,
 			);
