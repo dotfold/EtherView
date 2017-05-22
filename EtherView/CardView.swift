@@ -39,7 +39,7 @@ import SwiftyJSON
     }
     
     func initBindings () {
-        exchangeVM.exchangeTrade$
+        exchangeVM.exchangeTradeLastPrice$
             .do(onNext: { [unowned self] _ in
                 // flash the view to indicate new data has arrived
                 let v = UIView(frame: self.bounds)
