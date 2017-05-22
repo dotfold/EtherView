@@ -1,4 +1,5 @@
 github "ReactiveX/RxSwift" "3.4.1"
+github "RxSwiftCommunity/RxGesture" "1.0.1"
 github "RxSwiftCommunity/RxSegue" "1.0.0"
 github "RxSwiftCommunity/RxStarscream" "0.6"
 github "SwiftyJSON/SwiftyJSON" "3.1.4"
