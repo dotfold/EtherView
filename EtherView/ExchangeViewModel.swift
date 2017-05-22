@@ -13,7 +13,8 @@ import SwiftyJSON
 class ExchangeViewModel {
     
     var exchangeTrade = Variable<JSON>(JSON(0))
-    var exchangeTrade$: Observable<String>!
+    var exchangeTrade$: Observable<JSON>!
+    var exchangeTradeLastPrice$: Observable<String>!
     
     var exchangeTx = Variable<Int>(0)
     var exchangeTx$: Observable<Int>!
@@ -30,11 +31,8 @@ class ExchangeViewModel {
     
     func setup () {
         exchangeTrade$ = exchangeTrade.asObservable()
-//            .do(onNext: { val in
-//                print("val \(val)")
-//            })
+        exchangeTradeLastPrice$ = exchangeTrade.asObservable()
             .map({ (trade: JSON) -> String in
-                print(trade[1][6].floatValue)
                 return String(format: "%.2f", trade[1][6].floatValue)
             })
         
