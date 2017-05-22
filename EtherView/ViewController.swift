@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxSegue
+import RxGesture
 import SwiftyJSON
 
 struct StoryBoard {
@@ -43,51 +44,33 @@ extension UIStoryboard {
 class ViewController: UIViewController {
     let disposeBag = DisposeBag()
     
-    @IBOutlet weak var ex1: UIButton!
-    @IBOutlet weak var ex2: UIButton!
-    @IBOutlet weak var ex3: UIButton!
+    @IBOutlet weak var bitfinexCardView: CardView!
     
+    fileprivate var exchangeViewModel: ExchangeViewModel!
     
-    var profileSegue: AnyObserver<Exchange> {
+    var profileSegue: AnyObserver<ExchangeViewModel> {
         return NavigationSegue(fromViewController: self.navigationController!,
                                toViewControllerFactory: { (sender, context) -> ExchangeDetailViewController in
                                 let exchangeDetailVC: ExchangeDetailViewController = StoryBoard.main
                                     .instantiateViewController()
-                                exchangeDetailVC.exchange = context
+                                exchangeDetailVC.exchangeVM = context
                                 return exchangeDetailVC
         }).asObserver()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        ex1.rx.tap
-            .map {
-                return Exchange(name: "Exchange One")
-            }
+        self.title = "EtherView"
+        
+        exchangeViewModel = ExchangeViewModel(name: "Bitfinex")
+        bitfinexCardView.exchangeVM = exchangeViewModel
+        bitfinexCardView.rx.tapGesture().when(.recognized)
+            .map({ [unowned self] _ in
+                return self.exchangeViewModel
+            })
             .bind(to: profileSegue)
             .addDisposableTo(disposeBag)
-        
-        ex2.rx.tap
-            .map {
-                return Exchange(name: "Exchange Two")
-            }
-            .bind(to: profileSegue)
-            .addDisposableTo(disposeBag)
-        
-        ex3.rx.tap
-            .map {
-                return Exchange(name: "Exchange Three")
-            }
-            .bind(to: profileSegue)
-            .addDisposableTo(disposeBag)
-        
-//        _ = createSocketObservable(address: "wss://www.bitmex.com/realtime?subscribe=quote")
-//            .do(onNext: { _ in
-//                print("message received")
-//            })
-//            .subscribe()
         
         let bitfinex = createSocketObservable(address: "wss://api.bitfinex.com/ws/2").share()
         
@@ -118,9 +101,15 @@ class ViewController: UIViewController {
                 // "hb" update messages should be ignored
                 return obj[1].string == nil
             })
-            .do(onNext: { val in
-//                print(val)
-            })
+            // filter 0 values and json objects with an event key (they are info messages)
+            .filter({ $0 != 0 || !$0["event"].exists() })
+//            .do(onNext: { val in
+//                print("trade \(val) \(z) \(e)")
+//            })
+        
+        _ = bitfinexTrades
+            .bind(to: exchangeViewModel.exchangeTrade)
+            .addDisposableTo(disposeBag)
         
         // moving average of trades per minute, the 60 second window is sliding after the first minute of running
         // this is more complicated than it should be due to the limited implementation of the `window` operator in RxSwift
@@ -140,13 +129,10 @@ class ViewController: UIViewController {
             
         _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
             .withLatestFrom(runningTotal, resultSelector: { (interval, total) -> Int in
-                print(": \(interval) \(total)")
                 return total
             })
-            .do(onNext: { (total: Int) in
-                print("running total \(total)")
-            })
-            .subscribe()
+            .bind(to: exchangeViewModel.exchangeTx)
+            .addDisposableTo(disposeBag)
         
         bitfinexTrades
             .subscribe()
