@@ -21,6 +21,10 @@
 		79BD697F1ED289BC0051F78A /* RxStarscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD697D1ED289BC0051F78A /* RxStarscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		79BD69811ED2A0890051F78A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD69801ED2A0890051F78A /* SwiftyJSON.framework */; };
 		79BD69821ED2A0890051F78A /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD69801ED2A0890051F78A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		79BD69871ED2C3600051F78A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD69861ED2C3600051F78A /* CardView.swift */; };
+		79BD69891ED2CA030051F78A /* RxGesture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD69881ED2CA030051F78A /* RxGesture.framework */; };
+		79BD698A1ED2CA030051F78A /* RxGesture.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD69881ED2CA030051F78A /* RxGesture.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		79BD698C1ED2CBA00051F78A /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD698B1ED2CBA00051F78A /* ExchangeViewModel.swift */; };
 		79D990201ECDBA7B0095E5F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */; };
 		79D990221ECDBA7B0095E5F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D990211ECDBA7B0095E5F4 /* ViewController.swift */; };
 		79D990251ECDBA7B0095E5F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79D990231ECDBA7B0095E5F4 /* Main.storyboard */; };
@@ -38,6 +42,7 @@
 			files = (
 				794199F51ECDD1D100D10CD7 /* RxCocoa.framework in Embed Frameworks */,
 				794199EF1ECDD1C500D10CD7 /* RxSegue.framework in Embed Frameworks */,
+				79BD698A1ED2CA030051F78A /* RxGesture.framework in Embed Frameworks */,
 				79BD69821ED2A0890051F78A /* SwiftyJSON.framework in Embed Frameworks */,
 				79BD697F1ED289BC0051F78A /* RxStarscream.framework in Embed Frameworks */,
 				794199F21ECDD1CB00D10CD7 /* Starscream.framework in Embed Frameworks */,
@@ -57,6 +62,9 @@
 		79BD697B1ED278F50051F78A /* SocketObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketObservable.swift; sourceTree = "<group>"; };
 		79BD697D1ED289BC0051F78A /* RxStarscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxStarscream.framework; path = Carthage/Build/iOS/RxStarscream.framework; sourceTree = "<group>"; };
 		79BD69801ED2A0890051F78A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		79BD69861ED2C3600051F78A /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		79BD69881ED2CA030051F78A /* RxGesture.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxGesture.framework; path = Carthage/Build/iOS/RxGesture.framework; sourceTree = "<group>"; };
+		79BD698B1ED2CBA00051F78A /* ExchangeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
 		79D9901C1ECDBA7B0095E5F4 /* EtherView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtherView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79D990211ECDBA7B0095E5F4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +82,7 @@
 			files = (
 				794199F41ECDD1D100D10CD7 /* RxCocoa.framework in Frameworks */,
 				794199EE1ECDD1C500D10CD7 /* RxSegue.framework in Frameworks */,
+				79BD69891ED2CA030051F78A /* RxGesture.framework in Frameworks */,
 				79BD69811ED2A0890051F78A /* SwiftyJSON.framework in Frameworks */,
 				79BD697E1ED289BC0051F78A /* RxStarscream.framework in Frameworks */,
 				794199F11ECDD1CB00D10CD7 /* Starscream.framework in Frameworks */,
@@ -111,6 +120,7 @@
 		79D990131ECDBA7B0095E5F4 = {
 			isa = PBXGroup;
 			children = (
+				79BD69881ED2CA030051F78A /* RxGesture.framework */,
 				79BD69801ED2A0890051F78A /* SwiftyJSON.framework */,
 				79BD697D1ED289BC0051F78A /* RxStarscream.framework */,
 				794199F31ECDD1D100D10CD7 /* RxCocoa.framework */,
@@ -138,6 +148,8 @@
 				79BD69761ED276B00051F78A /* DetailsView */,
 				79D9901F1ECDBA7B0095E5F4 /* AppDelegate.swift */,
 				79D990211ECDBA7B0095E5F4 /* ViewController.swift */,
+				79BD698B1ED2CBA00051F78A /* ExchangeViewModel.swift */,
+				79BD69861ED2C3600051F78A /* CardView.swift */,
 				79D990231ECDBA7B0095E5F4 /* Main.storyboard */,
 				79D990261ECDBA7B0095E5F4 /* Assets.xcassets */,
 				79D990281ECDBA7B0095E5F4 /* LaunchScreen.storyboard */,
@@ -223,7 +235,9 @@
 				79BD697C1ED278F50051F78A /* SocketObservable.swift in Sources */,
 				79D990321ECDC20B0095E5F4 /* ExchangeDetailViewController.swift in Sources */,
 				79BD697A1ED278E70051F78A /* ExchangeData.swift in Sources */,
+				79BD69871ED2C3600051F78A /* CardView.swift in Sources */,
 				79D990201ECDBA7B0095E5F4 /* AppDelegate.swift in Sources */,
+				79BD698C1ED2CBA00051F78A /* ExchangeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
