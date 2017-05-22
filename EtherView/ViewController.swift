@@ -102,11 +102,8 @@ class ViewController: UIViewController {
                 return obj[1].string == nil
             })
             // filter 0 values and json objects with an event key (they are info messages)
-            .filter({ $0 != 0 || !$0["event"].exists() })
-//            .do(onNext: { val in
-//                print("trade \(val) \(z) \(e)")
-//            })
-        
+            .filter({ $0 != 0 && $0 != "0" && !$0["event"].exists() })
+            
         _ = bitfinexTrades
             .bind(to: exchangeViewModel.exchangeTrade)
             .addDisposableTo(disposeBag)
