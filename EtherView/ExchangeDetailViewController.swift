@@ -15,13 +15,12 @@ class ExchangeDetailViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     
-    var exchange: Exchange!
+    var exchangeVM: ExchangeViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        exchange.name
-            .asObservable()
+        exchangeVM.exchangeName$
             .bind(to: nameLabel.rx.text)
             .addDisposableTo(disposeBag)
         
