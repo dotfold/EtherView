@@ -9,21 +9,59 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
-class ExchangeDetailViewController: UIViewController {
+class ExchangeDetailViewController: UIViewController, UITableViewDelegate {
     let disposeBag = DisposeBag()
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    
     var exchangeVM: ExchangeViewModel!
+    
+    @IBOutlet weak var tradeTableView: UITableView!
+    @IBOutlet weak var volumeLabel: UILabel!
+    @IBOutlet weak var changeLabel: UILabel!
+    @IBOutlet weak var highLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        exchangeVM.exchangeName$
-            .bind(to: nameLabel.rx.text)
+        // only display rows that have data
+        tradeTableView.tableFooterView = UIView()
+        
+        tradeTableView.rx.setDelegate(self)
             .addDisposableTo(disposeBag)
         
-        // bind exchange image to custom navigation bar uiimage
+        exchangeVM.exchangeTrade$
+            .map({ trade in
+                return String(format: "%.2f", trade[1][7].floatValue)
+            })
+            .bind(to: volumeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        exchangeVM.exchangeTrade$
+            .map({ trade in
+                return String(format: "%.2f", trade[1][4].floatValue)
+            })
+            .bind(to: changeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        exchangeVM.exchangeTrade$
+            .map({ trade in
+                return String(format: "%.2f", trade[1][8].floatValue)
+            })
+            .bind(to: highLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        _ = exchangeVM.exchangeTrade$
+            .scan([]) { lastSlice, trade -> Array<String> in
+                let append = String(format: "%.2f", trade[1][6].floatValue)
+                return Array(
+                        Array(lastSlice + [append]).suffix(10)
+                    ).reversed()
+            }
+            .flatMap { Observable.from(optional: $0) }
+            .bind(to: tradeTableView.rx.items(cellIdentifier: "TradeTableCell", cellType: TradeTableCell.self)) { (row, element, cell) in
+                cell.cellData = element
+            }
+            .disposed(by: disposeBag)
+        
     }
 }
