@@ -2,3 +2,4 @@ github "ReactiveX/RxSwift" ~> 3.3.1
 github "RxSwiftCommunity/RxStarscream" >= 0.4
 github "RxSwiftCommunity/RxSegue" ~> 1.0.0
 github "daltoniam/Starscream" >= 2.0.2
+github "SwiftyJSON/SwiftyJSON"
