@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxSegue
+import SwiftyJSON
 
 struct StoryBoard {
     static let main = UIStoryboard(name: "Main", bundle: nil)
@@ -81,6 +82,61 @@ class ViewController: UIViewController {
             }
             .bind(to: profileSegue)
             .addDisposableTo(disposeBag)
+        
+//        _ = createSocketObservable(address: "wss://www.bitmex.com/realtime?subscribe=quote")
+//            .do(onNext: { _ in
+//                print("message received")
+//            })
+//            .subscribe()
+        
+        let bitfinex = createSocketObservable(address: "wss://api.bitfinex.com/ws/2").share()
+        
+//        bitfinex trade channel response format
+//        [
+//            2,
+//            [
+//                148.5,            // 0 bid
+//                66.10374596,      // 1 bid amount
+//                148.98,           // 2 ask
+//                7.11585876,       // 3 ask amount
+//                23.41,            // 4 24 hr change
+//                0.1864,           // 5 daily change % (need to * 100)
+//                148.98,           // 6 last price
+//                285552.07277477,  // 7 volume
+//                149.19,           // 8 high
+//                123.55            // 9 low
+//            ]
+//        ]
+        let bitfinexTrades = bitfinex
+            .map({ (message: SocketMessage) -> JSON in
+                if let dataFromString = message.message?.data(using: .utf8, allowLossyConversion: false) {
+                    return JSON(data: dataFromString)
+                }
+                return JSON(0)
+            })
+            .filter({ obj in
+                // "hb" update messages should be ignored
+                return obj[1].string == nil
+            })
+            .do(onNext: { val in
+//                print(val)
+            })
+        bitfinexTrades
+            .subscribe()
+            .addDisposableTo(disposeBag)
+        
+        // take one connected message and send a subscribe message back into the socket
+        _ = bitfinex
+            .filter({ $0.status == "Connected" })
+            .do(onNext: { (message: SocketMessage) in
+                let jsonString = "{\"event\": \"subscribe\", \"channel\": \"ticker\", \"symbol\": \"tETHUSD\"}"
+                message.socket?.write(string: jsonString)
+            })
+            .take(1)
+            .subscribe()
+            .addDisposableTo(disposeBag)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
