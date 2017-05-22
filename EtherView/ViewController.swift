@@ -48,6 +48,7 @@ class ViewController: UIViewController {
     
     fileprivate var exchangeViewModel: ExchangeViewModel!
     
+    // Declare a segue in code
     var profileSegue: AnyObserver<ExchangeViewModel> {
         return NavigationSegue(fromViewController: self.navigationController!,
                                toViewControllerFactory: { (sender, context) -> ExchangeDetailViewController in
@@ -63,8 +64,12 @@ class ViewController: UIViewController {
         
         self.title = "EtherView"
         
+        // setup the viewmodel for bitfinex
         exchangeViewModel = ExchangeViewModel(name: "Bitfinex")
         bitfinexCardView.exchangeVM = exchangeViewModel
+        
+        
+        // register a tap gesture on the CardView to initiate the segue
         bitfinexCardView.rx.tapGesture().when(.recognized)
             .map({ [unowned self] _ in
                 return self.exchangeViewModel
@@ -72,7 +77,7 @@ class ViewController: UIViewController {
             .bind(to: profileSegue)
             .addDisposableTo(disposeBag)
         
-        let bitfinex = createSocketObservable(address: "wss://api.bitfinex.com/ws/2").share()
+        let bitfinex$ = createSocketObservable(address: "wss://api.bitfinex.com/ws/2").share()
         
 //        bitfinex trade channel response format
 //        [
@@ -90,7 +95,9 @@ class ViewController: UIViewController {
 //                123.55            // 9 low
 //            ]
 //        ]
-        let bitfinexTrades = bitfinex
+        
+        // main subscription on the socket data
+        let bitfinexTrades$ = bitfinex$
             .map({ (message: SocketMessage) -> JSON in
                 if let dataFromString = message.message?.data(using: .utf8, allowLossyConversion: false) {
                     return JSON(data: dataFromString)
@@ -104,39 +111,46 @@ class ViewController: UIViewController {
             // filter 0 values and json objects with an event key (they are info messages)
             .filter({ $0 != 0 && $0 != "0" && !$0["event"].exists() })
             
-        _ = bitfinexTrades
+        _ = bitfinexTrades$
             .bind(to: exchangeViewModel.exchangeTrade)
             .addDisposableTo(disposeBag)
         
         // moving average of trades per minute, the 60 second window is sliding after the first minute of running
         // this is more complicated than it should be due to the limited implementation of the `window` operator in RxSwift
-        let window = bitfinexTrades
+        
+        // take a scan to accumulate counts
+        let window$ = bitfinexTrades$
             .scan(0, accumulator: { (prevCount: Int, next: JSON) -> Int in
                 return prevCount + 1
             })
             .startWith(0)
-            
-        let withDelay = window
+        
+        // set up the sliding window for every 60 seconds
+        let withDelay$ = window$
             .delay(RxTimeInterval(60), scheduler: MainScheduler.instance)
             .startWith(0)
 
-        let runningTotal = Observable.combineLatest(window, withDelay, resultSelector: { (total: Int, td: Int) -> Int in
+        // get the difference, which is our value for the current window
+        let runningTotal$ = Observable.combineLatest(window$, withDelay$, resultSelector: { (total: Int, td: Int) -> Int in
             return total - td
         })
-            
+        
+        // sample every second to update the viewmodel
         _ = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
-            .withLatestFrom(runningTotal, resultSelector: { (interval, total) -> Int in
+            .withLatestFrom(runningTotal$, resultSelector: { (interval, total) -> Int in
                 return total
             })
             .bind(to: exchangeViewModel.exchangeTx)
             .addDisposableTo(disposeBag)
         
-        bitfinexTrades
+        bitfinexTrades$
             .subscribe()
             .addDisposableTo(disposeBag)
         
         // take one connected message and send a subscribe message back into the socket
-        _ = bitfinex
+        // without this, we just have an open socket. The bitfinex API requires this message to be sent
+        // in order to subscribe to a channel.
+        _ = bitfinex$
             .filter({ $0.status == "Connected" })
             .do(onNext: { (message: SocketMessage) in
                 let jsonString = "{\"event\": \"subscribe\", \"channel\": \"ticker\", \"symbol\": \"tETHUSD\"}"

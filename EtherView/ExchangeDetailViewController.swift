@@ -29,6 +29,7 @@ class ExchangeDetailViewController: UIViewController, UITableViewDelegate {
         tradeTableView.rx.setDelegate(self)
             .addDisposableTo(disposeBag)
         
+        // details display across the top (above the table)
         exchangeVM.exchangeTrade$
             .map({ trade in
                 return String(format: "%.2f", trade[1][7].floatValue)
@@ -50,6 +51,7 @@ class ExchangeDetailViewController: UIViewController, UITableViewDelegate {
             .bind(to: highLabel.rx.text)
             .disposed(by: disposeBag)
         
+        // create a bucket of the most recent 10 trades to arrive and bind them to the table rows
         _ = exchangeVM.exchangeTrade$
             .scan([]) { lastSlice, trade -> Array<String> in
                 let append = String(format: "%.2f", trade[1][6].floatValue)

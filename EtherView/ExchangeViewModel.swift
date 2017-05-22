@@ -12,13 +12,16 @@ import SwiftyJSON
 
 class ExchangeViewModel {
     
+    // trades
     var exchangeTrade = Variable<JSON>(JSON(0))
     var exchangeTrade$: Observable<JSON>!
     var exchangeTradeLastPrice$: Observable<String>!
     
+    // transactions per minute (sliding window)
     var exchangeTx = Variable<Int>(0)
     var exchangeTx$: Observable<Int>!
     
+    // exchange name
     var exchangeName = Variable<String>("")
     var exchangeName$: Observable<String>!
     

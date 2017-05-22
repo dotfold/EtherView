@@ -38,10 +38,13 @@ import SwiftyJSON
         self.layer.borderColor = UIColor(red: 222/255, green: 222/255, blue: 222/255, alpha: 1.0).cgColor
     }
     
+    // set up bindings from the viewmodel when the viewmodel is set on this class
     func initBindings () {
+        
         exchangeVM.exchangeTradeLastPrice$
+            // a UI side effect
+            // flash the tile background to indicate new data has arrived
             .do(onNext: { [unowned self] _ in
-                // flash the view to indicate new data has arrived
                 let v = UIView(frame: self.bounds)
                 v.backgroundColor = UIColor(red: 62/255, green: 100/255, blue: 163/255, alpha: 1.0)
                 v.alpha = 0.25
@@ -56,6 +59,7 @@ import SwiftyJSON
             .bind(to: tradePrice.rx.text)
             .addDisposableTo(disposeBag)
         
+        // transactions per miniute display (sliding window)
         exchangeVM.exchangeTx$
             .map({ tx in
                 return "\(tx) tx/min"
@@ -63,6 +67,7 @@ import SwiftyJSON
             .bind(to: tradeTx.rx.text)
             .addDisposableTo(disposeBag)
         
+        // name of the exchange set on the viewmodel
         exchangeVM.exchangeName$
             .bind(to: exchangeName.rx.text)
             .addDisposableTo(disposeBag)
